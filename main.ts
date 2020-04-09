@@ -507,6 +507,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
             mySprite3.setFlag(SpriteFlag.Ghost, true)
             mySprite3.setPosition(mySprite2.x, mySprite2.y)
             mySprite3.setVelocity(-20, 20)
+            random_numper = Math.randomRange(100, 300)
             animation.runImageAnimation(
             mySprite3,
             [img`
@@ -578,10 +579,11 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `],
-            Math.randomRange(100, 300),
+            random_numper,
             false
             )
-            pause(200)
+            pause(2 * random_numper)
+            mySprite3.destroy()
         }
     } else {
         if (f == 2) {
@@ -627,6 +629,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                 mySprite3.setFlag(SpriteFlag.Ghost, true)
                 mySprite3.setPosition(mySprite2.x, mySprite2.y)
                 mySprite3.setVelocity(20, 20)
+                random_numper = Math.randomRange(100, 300)
                 animation.runImageAnimation(
                 mySprite3,
                 [img`
@@ -698,10 +701,11 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `],
-                Math.randomRange(100, 300),
+                random_numper,
                 false
                 )
-                pause(200)
+                pause(2 * random_numper)
+                mySprite3.destroy()
             }
         }
     }
@@ -867,6 +871,11 @@ c c c c c c . . . . . . . . . .
                 Ice_Cat.say("thank you")
                 Magic_Cat.say("thank you")
                 Quest_sterted = 4
+                if (game.ask("ice projectile = yes", "charge = no")) {
+                    carge_or_not = 1
+                } else {
+                    carge_or_not = 2
+                }
             }
         }
     }
@@ -1317,6 +1326,7 @@ scene.onHitWall(SpriteKind.Projectile, function (sprite) {
         mySprite3.setFlag(SpriteFlag.Ghost, true)
         mySprite3.setPosition(sprite.x, sprite.y)
         mySprite3.setVelocity(Math.randomRange(100, -100), Math.randomRange(100, -100))
+        random_numper = Math.randomRange(100, 300)
         animation.runImageAnimation(
         mySprite3,
         [img`
@@ -1391,8 +1401,12 @@ scene.onHitWall(SpriteKind.Projectile, function (sprite) {
         Math.randomRange(100, 300),
         false
         )
+        pause(1)
     }
     sprite.destroy()
+    for (let index = 0; index < 10; index++) {
+        mySprite3.destroy()
+    }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     if (sprite.y < otherSprite.top) {
@@ -1448,7 +1462,9 @@ let locaskon: tiles.Location = null
 let mySprite5: Sprite = null
 let if_jupp2 = false
 let if_jump = false
+let carge_or_not = 0
 let name = ""
+let random_numper = 0
 let mySprite3: Sprite = null
 let mySprite2: Sprite = null
 let f = 0
